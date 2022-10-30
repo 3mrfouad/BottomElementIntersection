@@ -52,9 +52,9 @@ function BottomElementProvider({ children }) {
   }, [ref.current])
 
   const handleScroll = () => {
-    const isDocumentBottom =
+    const isBottom =
       document.body.offsetHeight - (window.innerHeight + window.scrollY) <= 5
-    setReachedBottom(isDocumentBottom && inView)
+    setReachedBottom(isBottom && inView)
   }
 
   // attach onscroll event handler
