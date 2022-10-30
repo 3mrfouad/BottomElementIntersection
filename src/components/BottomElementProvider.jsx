@@ -27,7 +27,7 @@ function getElementHeight(eleRef) {
 function BottomElementProvider({ children }) {
   if (typeof window === 'undefined' || !document) return children
 
-  const [bottomElementHeight, setBackToTopHeight] = useState(0)
+  const [bottomElementHeight, setBottomElementHeight] = useState(0)
   const [shouldUpdateBottom, setReachedBottom] = useState(false)
 
   const ref = useRef()
@@ -47,7 +47,7 @@ function BottomElementProvider({ children }) {
   useEffect(() => {
     if (ref.current) {
       const eleHeight = getElementHeight(ref.current)
-      setBackToTopHeight(eleHeight)
+      setBottomElementHeight(eleHeight)
     }
   }, [ref.current])
 
