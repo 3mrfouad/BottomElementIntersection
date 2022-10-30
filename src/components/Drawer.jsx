@@ -3,14 +3,14 @@ import React, { useContext } from 'react'
 import BottomElementContext from './BottomElementContext'
 
 function Drawer(props) {
-  const { shouldUpdateBottom, bottomElementHeight } =
+  const { shouldUpdateIntersectingElement, bottomElementHeight } =
     useContext(BottomElementContext)
 
   return (
     <div
       className="drawer"
       style={{
-        bottom: shouldUpdateBottom ? bottomElementHeight : 0
+        bottom: shouldUpdateIntersectingElement ? bottomElementHeight : 0
       }}
     >
       Drawer

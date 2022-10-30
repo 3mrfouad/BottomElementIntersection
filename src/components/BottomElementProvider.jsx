@@ -28,7 +28,7 @@ function BottomElementProvider({ children }) {
   if (typeof window === 'undefined' || !document) return children
 
   const [bottomElementHeight, setBottomElementHeight] = useState(0)
-  const [shouldUpdateBottom, setReachedBottom] = useState(false)
+  const [shouldUpdateIntersectingElement, setReachedBottom] = useState(false)
 
   const ref = useRef()
 
@@ -63,10 +63,10 @@ function BottomElementProvider({ children }) {
   const value = useMemo(
     () => ({
       bottomElementHeight,
-      shouldUpdateBottom,
+      shouldUpdateIntersectingElement,
       setRef
     }),
-    [bottomElementHeight, shouldUpdateBottom, setRef]
+    [bottomElementHeight, shouldUpdateIntersectingElement, setRef]
   )
 
   return (

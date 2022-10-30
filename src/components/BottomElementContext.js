@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 
 const BottomElementContext = createContext({
-  shouldUpdateBottom: false,
+  shouldUpdateIntersectingElement: false,
   bottomElementHeight: 0,
   setRef: () => {}
 })
