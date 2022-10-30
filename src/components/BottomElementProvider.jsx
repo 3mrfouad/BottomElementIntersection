@@ -4,18 +4,31 @@ import BottomElementContext from './BottomElementContext'
 import { useInView } from 'react-intersection-observer'
 
 function getElementHeight(eleRef) {
-  return parseInt(
-    getComputedStyle(eleRef).getPropertyValue('height').replace('px', ''),
-    10
+  return (
+    parseInt(
+      getComputedStyle(eleRef).getPropertyValue('height').replace('px', ''),
+      10
+    ) +
+    parseInt(
+      getComputedStyle(eleRef)
+        .getPropertyValue('padding-top')
+        .replace('px', ''),
+      10
+    ) +
+    parseInt(
+      getComputedStyle(eleRef)
+        .getPropertyValue('padding-bottom')
+        .replace('px', ''),
+      10
+    )
   )
 }
 
 function BottomElementProvider({ children }) {
   if (typeof window === 'undefined' || !document) return children
 
-  const [backToTopInView, setBackToTopInView] = useState(false)
-  const [backToTopHeight, setBackToTopHeight] = useState(0)
-  const [reachedBottom, setReachedBottom] = useState(false)
+  const [bottomElementHeight, setBackToTopHeight] = useState(0)
+  const [shouldUpdateBottom, setReachedBottom] = useState(false)
 
   const ref = useRef()
 
@@ -38,15 +51,10 @@ function BottomElementProvider({ children }) {
     }
   }, [ref.current])
 
-  // detect when element inView
-  useEffect(() => {
-    setBackToTopInView(inView)
-  }, [inView])
-
   const handleScroll = () => {
     const isDocumentBottom =
       document.body.offsetHeight - (window.innerHeight + window.scrollY) <= 5
-    setReachedBottom(isDocumentBottom)
+    setReachedBottom(isDocumentBottom && inView)
   }
 
   // attach onscroll event handler
@@ -54,12 +62,11 @@ function BottomElementProvider({ children }) {
 
   const value = useMemo(
     () => ({
-      backToTopInView,
-      backToTopHeight,
-      reachedBottom,
+      bottomElementHeight,
+      shouldUpdateBottom,
       setRef
     }),
-    [backToTopHeight, backToTopInView, reachedBottom, setRef]
+    [bottomElementHeight, shouldUpdateBottom, setRef]
   )
 
   return (
