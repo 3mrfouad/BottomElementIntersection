@@ -8,7 +8,7 @@ import React from 'react'
 function App() {
   return (
     <BottomElementProvider>
-      <div className="long" />
+      <div className="create-long-scroll" />
       <BackToTop />
       <Drawer />
     </BottomElementProvider>
