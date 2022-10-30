@@ -3,14 +3,14 @@ import React, { useContext } from 'react'
 import BottomElementContext from './BottomElementContext'
 
 function Drawer(props) {
-  const { backToTopInView, backToTopHeight, reachedBottom } =
+  const { shouldUpdateBottom, bottomElementHeight } =
     useContext(BottomElementContext)
 
   return (
     <div
       className="drawer"
       style={{
-        bottom: backToTopInView && reachedBottom ? backToTopHeight : 0
+        bottom: shouldUpdateBottom ? bottomElementHeight : 0
       }}
     >
       Drawer
